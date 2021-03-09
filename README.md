@@ -1,27 +1,23 @@
-# CarND-Controls-MPC
-Self-Driving Car Engineer Nanodegree Program
+# MPC- Model Predictive Control
 
----
 
 ## Project Description
 
 ### Overview
 
-**Model predictive control (MPC)** is an advanced method of process control which relies on dynamic models of the process.
-Differently from previously implemented [PID controller](https://github.com/ndrplz/self-driving-car/tree/master/project_9_PID_control), MPC controller has the ability to anticipate future events and can take control actions accordingly. Indeed, future time steps are taking into account while optimizing current time slot.
+**Model predictive control (MPC)** is a process control that depends on the dynamic or kinematic model of the vehicle.
+It has the ability to predict the future events and can control the actions. Also, future time steps are considered depending the time slots provided.
 
 The MPC controller framework consists in four main components:
- - **Trajectory** taken in consideration during optimization. This is parametrized by a number of time steps ***N*** spaced out by a time ***dt***. Clearly, the number of variables optimized is directly proportional to *N*, so this must be considered in case there are computational constraints.
+ - **Trajectory** which is considerd during optimization. It is calculated by a number of time steps ***N*** spaced out by a time ***dt***.
  
- - **Vehicle Model**, which is the set of equations that describes system behavior and updates across time steps. In our case, we used a simplified kinematic model (so called *bycicle model*) described by a state of six parameters:
-   - **x** car position (*x-axis*)
-   - **y** car position (*y-axis*)
-   - **psi** car's heading direction
-   - **v** car's velocity
+ - **Vehicle Model**, which is the set of equations that describes system behavior. Some of the constraints considered are 
+   - **x** car position along x axis
+   - **y** car position along y axiz
+   - **psi** be the car's moving direction
+   - **v** velosity of car
    - **cte** cross-track error
    - **epsi** orientation error
-   
-   Vehicle model update equations are implemented at lines 117-123 in [MPC.cpp](https://github.com/ndrplz/self-driving-car/blob/master/project_10_MPC_control/src/MPC.cpp).
    
  - **Contraints** necessary to model contrants in actuators' respose. For instance, a vehicle will never be able to steer 90 deegrees in a single time step. In this project we set these constraints as follows:
    - **steering**: bounded in range [-25°, 25°]
